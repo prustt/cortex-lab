@@ -204,12 +204,15 @@
     configureDevice() {
       const board = BOARD[this.lab.device.id];
       this.title.textContent = board ? "Gravar e monitorar · " + board.name : "Gravar e monitorar";
-      if (!this.supported)
+      if (!root.navigator?.usb)
         this._message(
-          "Por enquanto a gravação funciona só nas placas Tiva com depurador ICDI (EK-TM4C1294XL e EK-TM4C123GXL). Selecione um desses micros.",
+          "Este navegador não tem WebUSB (Safari e Firefox não têm). Abra esta página no Chrome ou no Edge do computador para gravar e monitorar a placa.",
+          true,
         );
-      else if (!root.navigator?.usb)
-        this._message("Este navegador não tem WebUSB. Use Chrome ou Edge no computador.", true);
+      else if (!this.supported)
+        this._message(
+          "Por enquanto a gravação funciona só nas placas Tiva com depurador ICDI (EK-TM4C1294XL e EK-TM4C123GXL). Selecione um desses micros no topo.",
+        );
       else if (!this.usbAllowed)
         this._message(
           "Esta página está dentro de outro site que bloqueia a USB (como o claude.ai). Para gravar, abra a versão publicada do Cortex Lab no Chrome ou Edge.",

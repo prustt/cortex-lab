@@ -10,6 +10,9 @@
   gap: 8px;
   margin-bottom: 10px;
 }
+#placaPanel button:disabled {
+  cursor: not-allowed;
+}
 .placa-row button.active {
   background: #e9f3ff;
   color: #1d66b7;
